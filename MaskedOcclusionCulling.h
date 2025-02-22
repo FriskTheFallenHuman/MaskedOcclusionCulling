@@ -74,7 +74,7 @@
  * Define USE_AVX512 to 1 to enable experimental AVX-512 support. It's currently mostly untested and only
  * validated on simple examples using Intel SDE. Older compilers may not support AVX-512 intrinsics.
  */
-#define USE_AVX512                      0
+#define USE_AVX512                      1
 
 #endif
 
