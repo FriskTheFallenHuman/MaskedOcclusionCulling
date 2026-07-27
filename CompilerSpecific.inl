@@ -36,12 +36,12 @@
 		return idx;
 	}
 
-	FORCE_INLINE void *aligned_alloc(size_t alignment, size_t size)
+	FORCE_INLINE void *moc_aligned_alloc(size_t alignment, size_t size)
 	{
 		return _aligned_malloc(size, alignment);
 	}
 
-	FORCE_INLINE void aligned_free(void *ptr)
+	FORCE_INLINE void moc_aligned_free(void *ptr)
 	{
 		_aligned_free(ptr);
 	}
@@ -77,14 +77,14 @@
 		return idx;
 	}
 
-	FORCE_INLINE void *aligned_alloc(size_t alignment, size_t size)
+	FORCE_INLINE void *moc_aligned_alloc(size_t alignment, size_t size)
 	{
 		void *ret;
-		posix_memalign( &ret, alignment, size );
+		posix_memalign(&ret, alignment, size);
 		return ret;
 	}
 
-	FORCE_INLINE void aligned_free(void *ptr)
+	FORCE_INLINE void moc_aligned_free(void *ptr)
 	{
 		free(ptr);
 	}
