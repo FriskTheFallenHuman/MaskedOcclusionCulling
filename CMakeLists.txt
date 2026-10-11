@@ -3,6 +3,8 @@
 #
 set(CMAKE_SUPPRESS_REGENERATION true)
 option(USE_AVX512 "Enable experimental AVX-512 support" OFF)
+option(ENABLE_INSTALL "Enable CMake install" ON)
+option(BUILD_DLL "Build has a dll instead of a lib" ON)
 
 #
 # Lists of all files included in the library
@@ -78,12 +80,18 @@ endif()
 #
 # Create masked occlusion culling library
 #
-add_library( MaskedOcclusionCulling ${MOC_FILES} )
+if (BUILD_DLL)
+	add_library( MaskedOcclusionCulling SHARED ${MOC_FILES} )
+else()
+	add_library( MaskedOcclusionCulling STATIC ${MOC_FILES} )
+endif()
 
 #
 # Add folder to include path
 #
 target_include_directories(MaskedOcclusionCulling PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-install(FILES MaskedOcclusionCulling.h FrameRecorder.h CullingThreadpool.h TYPE INCLUDE)
-install(TARGETS MaskedOcclusionCulling ARCHIVE LIBRARY RUNTIME)
+if (ENABLE_INSTALL)
+	install(FILES MaskedOcclusionCulling.h FrameRecorder.h CullingThreadpool.h TYPE INCLUDE)
+	install(TARGETS MaskedOcclusionCulling ARCHIVE LIBRARY RUNTIME)
+endif()
